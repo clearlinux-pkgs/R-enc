@@ -4,7 +4,7 @@
 #
 Name     : R-enc
 Version  : 0.2.0
-Release  : 2
+Release  : 3
 URL      : https://cran.r-project.org/src/contrib/enc_0.2.0.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/enc_0.2.0.tar.gz
 Summary  : Portable Tools for 'UTF-8' Character Data
