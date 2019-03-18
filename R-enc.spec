@@ -4,22 +4,20 @@
 #
 Name     : R-enc
 Version  : 0.2.0
-Release  : 7
+Release  : 8
 URL      : https://cran.r-project.org/src/contrib/enc_0.2.0.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/enc_0.2.0.tar.gz
 Summary  : Portable Tools for 'UTF-8' Character Data
 Group    : Development/Tools
 License  : GPL-3.0
-Requires: R-enc-lib
-Requires: R-readr
+Requires: R-enc-lib = %{version}-%{release}
 BuildRequires : R-readr
-BuildRequires : clr-R-helpers
+BuildRequires : buildreq-R
 
 %description
-Implements an S3 class for storing 'UTF-8' strings, based on regular character vectors.
-    Also contains routines to portably read and write 'UTF-8' encoded text files,
-    to convert all strings in an object to 'UTF-8',
-    and to create character vectors with various encodings.
+enc
+===
+[![Travis-CI Build Status](https://travis-ci.org/krlmlr/enc.svg?branch=master)](https://travis-ci.org/krlmlr/enc) [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/krlmlr/enc?branch=master&svg=true)](https://ci.appveyor.com/project/krlmlr/enc) [![codecov](https://codecov.io/gh/krlmlr/enc/branch/master/graph/badge.svg)](https://codecov.io/gh/krlmlr/enc) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/enc)](https://cran.r-project.org/package=enc)
 
 %package lib
 Summary: lib components for the R-enc package.
@@ -37,11 +35,11 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1532311197
+export SOURCE_DATE_EPOCH=1552902807
 
 %install
+export SOURCE_DATE_EPOCH=1552902807
 rm -rf %{buildroot}
-export SOURCE_DATE_EPOCH=1532311197
 export LANG=C
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
 export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
@@ -76,8 +74,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export _R_CHECK_FORCE_SUGGESTS_=false
-R CMD check --no-manual --no-examples --no-codoc -l %{buildroot}/usr/lib64/R/library enc|| : 
-cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
+R CMD check --no-manual --no-examples --no-codoc  enc || :
 
 
 %files
@@ -102,10 +99,39 @@ cp ~/.stash/* %{buildroot}/usr/lib64/R/library/*/libs/ || :
 /usr/lib64/R/library/enc/help/paths.rds
 /usr/lib64/R/library/enc/html/00Index.html
 /usr/lib64/R/library/enc/html/R.css
-/usr/lib64/R/library/enc/libs/symbols.rds
+/usr/lib64/R/library/enc/tests/testthat.R
+/usr/lib64/R/library/enc/tests/testthat/helper-encoding.R
+/usr/lib64/R/library/enc/tests/testthat/input/gb2312-utf8.txt
+/usr/lib64/R/library/enc/tests/testthat/input/gb2312.txt
+/usr/lib64/R/library/enc/tests/testthat/input/latin1-utf8.txt
+/usr/lib64/R/library/enc/tests/testthat/input/latin1.txt
+/usr/lib64/R/library/enc/tests/testthat/output/abc.txt
+/usr/lib64/R/library/enc/tests/testthat/output/ascii-crlf.txt
+/usr/lib64/R/library/enc/tests/testthat/output/ascii.txt
+/usr/lib64/R/library/enc/tests/testthat/output/gb2312-crlf.txt
+/usr/lib64/R/library/enc/tests/testthat/output/gb2312-utf8-crlf.txt
+/usr/lib64/R/library/enc/tests/testthat/output/gb2312-utf8.txt
+/usr/lib64/R/library/enc/tests/testthat/output/gb2312.txt
+/usr/lib64/R/library/enc/tests/testthat/output/latin1-crlf.txt
+/usr/lib64/R/library/enc/tests/testthat/output/latin1-utf8-crlf.txt
+/usr/lib64/R/library/enc/tests/testthat/output/latin1-utf8.txt
+/usr/lib64/R/library/enc/tests/testthat/output/latin1.txt
+/usr/lib64/R/library/enc/tests/testthat/test-ascii.R
+/usr/lib64/R/library/enc/tests/testthat/test-coercion.R
+/usr/lib64/R/library/enc/tests/testthat/test-construct.R
+/usr/lib64/R/library/enc/tests/testthat/test-ellipsis.R
+/usr/lib64/R/library/enc/tests/testthat/test-encoding.R
+/usr/lib64/R/library/enc/tests/testthat/test-output.R
+/usr/lib64/R/library/enc/tests/testthat/test-read-lines.R
+/usr/lib64/R/library/enc/tests/testthat/test-subset.R
+/usr/lib64/R/library/enc/tests/testthat/test-to-alien.R
+/usr/lib64/R/library/enc/tests/testthat/test-to-latin1.R
+/usr/lib64/R/library/enc/tests/testthat/test-to-native.R
+/usr/lib64/R/library/enc/tests/testthat/test-to-utf8.R
+/usr/lib64/R/library/enc/tests/testthat/test-transform-lines.R
+/usr/lib64/R/library/enc/tests/testthat/test-update.R
+/usr/lib64/R/library/enc/tests/testthat/test-write-lines.R
 
 %files lib
 %defattr(-,root,root,-)
 /usr/lib64/R/library/enc/libs/enc.so
-/usr/lib64/R/library/enc/libs/enc.so.avx2
-/usr/lib64/R/library/enc/libs/enc.so.avx512
