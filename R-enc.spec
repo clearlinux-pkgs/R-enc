@@ -4,29 +4,20 @@
 #
 Name     : R-enc
 Version  : 0.2.2
-Release  : 18
+Release  : 19
 URL      : https://cran.r-project.org/src/contrib/enc_0.2.2.tar.gz
 Source0  : https://cran.r-project.org/src/contrib/enc_0.2.2.tar.gz
 Summary  : Portable Tools for 'UTF-8' Character Data
 Group    : Development/Tools
 License  : GPL-3.0
 Requires: R-enc-lib = %{version}-%{release}
-Requires: R-readr
-BuildRequires : R-readr
 BuildRequires : buildreq-R
 
 %description
-# enc
-<!-- badges: start -->
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
-[![Travis-CI Build
-Status](https://travis-ci.org/krlmlr/enc.svg?branch=master)](https://travis-ci.org/krlmlr/enc)
-[![AppVeyor Build
-Status](https://ci.appveyor.com/api/projects/status/github/krlmlr/enc?branch=master&svg=true)](https://ci.appveyor.com/project/krlmlr/enc)
-[![codecov](https://codecov.io/gh/krlmlr/enc/branch/master/graph/badge.svg)](https://codecov.io/gh/krlmlr/enc)
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/enc)](https://cran.r-project.org/package=enc)
-<!-- badges: end -->
+Implements an S3 class for storing 'UTF-8' strings, based on regular character vectors.
+    Also contains routines to portably read and write 'UTF-8' encoded text files,
+    to convert all strings in an object to 'UTF-8',
+    and to create character vectors with various encodings.
 
 %package lib
 Summary: lib components for the R-enc package.
@@ -38,21 +29,22 @@ lib components for the R-enc package.
 
 %prep
 %setup -q -c -n enc
+cd %{_builddir}/enc
 
 %build
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1577141864
+export SOURCE_DATE_EPOCH=1589768561
 
 %install
-export SOURCE_DATE_EPOCH=1577141864
+export SOURCE_DATE_EPOCH=1589768561
 rm -rf %{buildroot}
 export LANG=C.UTF-8
 export CFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FCFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
-export FFLAGS="$CFLAGS -O3 -flto -fno-semantic-interposition "
+export FCFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
+export FFLAGS="$FFLAGS -O3 -flto -fno-semantic-interposition "
 export CXXFLAGS="$CXXFLAGS -O3 -flto -fno-semantic-interposition "
 export AR=gcc-ar
 export RANLIB=gcc-ranlib
